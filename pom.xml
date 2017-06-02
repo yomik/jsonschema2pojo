@@ -10,7 +10,7 @@
 
     <groupId>org.jsonschema2pojo</groupId>
     <artifactId>jsonschema2pojo</artifactId>
-    <version>0.4.36-SNAPSHOT</version>
+    <version>0.4.36-SL</version>
 
     <packaging>pom</packaging>
     <name>jsonschema2pojo</name>
@@ -191,6 +191,13 @@
                 </executions>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.kuali.maven.wagons</groupId>
+                <artifactId>maven-s3-wagon</artifactId>
+                <version>1.2.1</version>
+            </extension>
+        </extensions>
     </build>
 
     <profiles>
@@ -461,9 +468,27 @@
             <id>gradle-workaround</id>
             <url>http://repo.spring.io/plugins-release</url>
             <snapshots>
-              <enabled>false</enabled>
+                <enabled>false</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>aws-release</id>
+            <url>s3://spotlight-android-repo/releases</url>
+        </repository>
+        <repository>
+            <id>aws-snapshot</id>
+            <url>s3://spotlight-android-repo/snapshots</url>
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>aws-snapshot</id>
+            <url>s3://spotlight-android-repo/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>aws-release</id>
+            <url>s3://spotlight-android-repo/releases</url>
+        </repository>
+    </distributionManagement>
 </project>
